@@ -1,0 +1,54 @@
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background: @bg-color;
+    padding: 15px 0;
+    transition: background-color @ani-speed @ani-easing, border-color @ani-speed @ani-easing;
+    border-bottom: 5px solid transparent;
+
+    .logo {
+        transition: width @ani-speed @ani-easing;
+        width: 200px;
+        height: auto;
+        margin-bottom: 20px;
+    }
+
+    ul {
+        display: flex;
+        justify-content: center;
+
+        li {
+            a {
+                padding: 0 5px;
+                @media(min-width: @mobile) {
+                    padding: 0 20px;
+                }
+                color: white;
+                display: inline-flex;
+                text-decoration: none;
+                text-transform: uppercase;
+                font-weight: 600;
+                transition: color @ani-speed @ani-easing;
+
+                &:hover {
+                    color: @primary;
+                }
+                &:active {
+                    color: @primary;
+                }
+            }
+        }
+    }
+
+    &.shrink {
+        background-color: black;
+        border-bottom: 5px solid @primary;
+
+        .logo {
+            width: 140px;
+        }
+    }
+}
