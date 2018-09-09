@@ -40,43 +40,34 @@
 }
 
 ul {
-    list-style: none;
     padding: 0;
     margin: 0;
 }
 
-h1, h2, h3 {
-    font-weight: 300;
-    text-align: center;
-    color: @primary;
-}
-
 h1 {
-    font-size: 2.0em;
+    font-size: 2.4rem;
+    @media (min-width: @mobile) {
+        font-size: 3.6rem;
+    }
+    font-weight: 100;
+    color: @secondary;
+    text-transform: uppercase;
+    margin: 0;
 }
 
 h2 {
-    font-size: 1.8em;
-}
+    font-size: 2.4rem;
+    @media (min-width: @mobile) {
+        font-size: 3.2rem;
+    }
+    font-weight: 100;
+    color: @primary;
+    text-transform: uppercase;
 
-h3 {
-    font-size: 1.4em;
-}
-
-.text-center {
-    text-align: center;
-}
-
-.contact-list {
-    li {
-        position: relative;
-        padding-left: 35px;
-        margin-bottom: 20px;
-
-        svg {
-            position: absolute;
-            top: 0;
-            left: 0;
+    & + p {
+        font-size: 1.8rem;
+        @media (min-width: @mobile) {
+            font-size: 2.4rem;
         }
     }
 }
@@ -90,64 +81,4 @@ a {
     &:hover {
         opacity: 0.7;
     }
-}
-
-.testimonial {
-    text-align: center;
-
-    blockquote {
-        position: relative;
-        margin: 0;
-        padding: 0;
-        border: none;
-        font-size: 1.6em;
-        margin-bottom: 15px;
-        width: 90%;
-        @media (min-width: @mobile) {
-            width: 75%;
-        }
-        margin-right: auto;
-        margin-left: auto;
-
-        &::before, &::after {
-            content: '"';
-            font-size: 6rem;
-            @media (min-width: @mobile) {
-                font-size: 10rem;
-            }
-            color: @secondary;
-            font-weight: 700;
-            position: absolute;
-            top: 10px;
-        }
-
-        &::before {
-            left: -60px;
-            @media (min-width: @mobile) {
-                left: -75px;
-            }
-        }
-
-        &::after {
-            right: -60px;
-            @media (min-width: @mobile) {
-                right: -75px;
-            }
-        }
-    }
-
-    figcaption {
-        font-weight: 600;
-        font-size: 1.4em;
-        color: @primary;
-    }
-}
-
-.icon {
-  display: inline-block;
-  width: 1.5em;
-  height: 1.5em;
-  stroke-width: 0;
-  stroke: currentColor;
-  fill: currentColor;
 }

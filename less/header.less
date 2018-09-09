@@ -1,43 +1,56 @@
 header {
+    padding: 15px 0;
+    overflow: hidden;
+    text-align: left;
     position: fixed;
     top: 0;
-    left: 0;
     right: 0;
-    z-index: 10;
-    background: @bg-color;
-    padding: 15px 0;
-    transition: background-color @ani-speed @ani-easing, border-color @ani-speed @ani-easing;
-    border-bottom: 5px solid transparent;
+    left: 0;
+    z-index: 1;
+
+    .container {
+        position: relative;
+        overflow: hidden;
+    }
 
     .logo {
         transition: width @ani-speed @ani-easing;
-        width: 200px;
+        width: 168px;
         height: auto;
-        margin-bottom: 20px;
+        float: left;
+    }
+
+    nav {
+        float: right;
+        position: absolute;
+        right: 0;
+        bottom: -4px;
     }
 
     ul {
         display: flex;
         justify-content: center;
+        list-style: none;
 
         li {
             a {
                 padding: 0 5px;
                 @media(min-width: @mobile) {
-                    padding: 0 20px;
+                    padding: 0 0 0 15px;
                 }
-                color: white;
+                color: @primary;
                 display: inline-flex;
                 text-decoration: none;
                 text-transform: uppercase;
-                font-weight: 600;
+                font-weight: 100;
                 transition: color @ani-speed @ani-easing;
 
                 &:hover {
-                    color: @primary;
+                    color: @secondary;
                 }
-                &:active {
-                    color: @primary;
+                &.active {
+                    color: @secondary;
+                    font-weight: 300;
                 }
             }
         }

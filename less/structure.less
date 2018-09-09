@@ -1,92 +1,58 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
 body {
     font-family: @brand-font;
     background: @bg-color;
-    color: white;
+    color: @secondary;
     width: 100%;
     height: 100%;
     text-align: center;
     font-weight: 300;
+    font-size: 1.6rem;
     margin: 0;
     padding: 0;
+    position: relative;
 }
 
 section {
     width: 100%;
 }
 
-.strip {
-    width: 90vw;
+.container {
+    width: 95%;
+    margin: 0 auto;
+
     @media (min-width: @mobile) {
-        width: 80vw;
+        max-width: 1000px;
     }
-    max-width: 1100px;
-    padding: 40px 9px;
-    margin: auto;
-    text-align: left;
 }
 
-.contact-details {
+.constrainer {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.strip {
+    padding: 30px 0 75px 0;
+
+    &.highlight {
+        background-color: @bg-color-highlight;
+    }
+}
+
+.grid-list {
+    margin-top: 20px;
+    text-align: left;
+    display: inline-block;
     @media (min-width: @mobile) {
         display: flex;
-        justify-content: center;
-        text-align: center;
-
-        div {
-            padding: 20px;
-        }
-    }
-
-
-    .map {
-        @media (min-width: @mobile) {
-            width: 40vw;
-            height: 400px;
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
-        }
-    }
-}
-
-.contact-list {
-    text-align: left;
-}
-
-.logo-title {
-    margin: auto;
-}
-
-.product {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-
-    img {
-        width: 100%;
-        height: auto;
-        @media (min-width: @mobile) {
-            position: relative;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-    }
-
-    .contents {
-        padding: 0 20px;
-        @media (min-width: @mobile) {
-            padding: 20px;
-        }
-
-        p {
-            position: relative;
-            @media (min-width: @mobile) {
-                top: 50%;
-                transform: translateY(-50%);
-            }
-            margin: 0;
-            padding: 0;
-        }
+        justify-content: space-around;
+        margin-top: 60px;
     }
 }

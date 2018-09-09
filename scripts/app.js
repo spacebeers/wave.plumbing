@@ -1,26 +1,39 @@
-$(document).ready(function() {
-    $('.gallery').slick({
-        autoplay: true,
-        autoplaySpeed: 5000,
-        infinite: true,
-        speed: 500,
-        fade: true,
-        cssEase: 'linear'
+(function () {
+    'use strict';
+
+    var section = document.querySelectorAll(".spy");
+    var sections = {};
+    var i = 0;
+
+    Array.prototype.forEach.call(section, function (e) {
+        sections[e.id] = e.offsetTop;
     });
 
-    $(".scroll-link").click(function (e) {
-        e.preventDefault();
-        var pos = $(e.currentTarget.hash).offset().top;
-        $('html, body').animate({
-            scrollTop: pos - 100
-        }, 1000);
-    });
+    window.onscroll = function () {
+        var scrollPosition = document.documentElement.scrollTop || document.body.scrollTop;
 
-    $(window).scroll(function () {
-        if ($(document).scrollTop() > 150) {
-            $('#header').addClass('shrink');
-        } else {
-            $('#header').removeClass('shrink');
+        for (i in sections) {
+            if (sections[i] <= scrollPosition) {
+                document.querySelector('.active').setAttribute('class', ' ');
+                document.querySelector('a[href*=' + i + ']').setAttribute('class', 'active');
+            }
+        }
+    };
+
+    var slider = tns({
+        container: '.gallery',
+        items: 1,
+        slideBy: 'page',
+        autoplay: false,
+        lazyload: true,
+        controls: false,
+        responsive: {
+            320: {
+                items: 2
+            },
+            800: {
+                disable: true
+            }
         }
     });
-});
+})();

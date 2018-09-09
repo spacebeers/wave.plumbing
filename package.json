@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.6",
-    "shufflejs": "^5.0.1"
+    "shufflejs": "^5.0.1",
+    "tiny-slider": "^2.8.6"
   }
 }
