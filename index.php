@@ -74,7 +74,8 @@
                             <li>Pumps</li>
                             <li>Toilets</li>
                             <li>Taps</li>
-                            <li>Washing machine and dishwasher installations</li>
+                            <li>Washing machine installations</li>
+                            <li>Dish washer installations</li>
                             <li>Replacement ball valves</li>
                         </ul>
                         <ul>
