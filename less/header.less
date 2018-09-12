@@ -1,12 +1,39 @@
 header {
     padding: 15px 0;
-    overflow: hidden;
-    text-align: left;
+    text-align: center;
+    @media (min-width: @mobile) {
+        text-align: left;
+        //overflow: hidden;
+    }
     position: fixed;
     top: 0;
     right: 0;
     left: 0;
-    z-index: 1;
+    z-index: 2;
+    transition: background-color @ani-speed @ani-easing;
+
+    &::after {
+        opacity: 0;
+        transition: opacity @ani-speed @ani-easing;
+        content: "";
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        height: 40px;
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#111111+63,f0f9ff+100&1+34,0+100 */
+        background: -moz-linear-gradient(top, rgba(17,17,17,1) 12%, rgba(17,17,17,0.56) 63%, rgba(240,249,255,0) 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, rgba(17,17,17,1) 12%,rgba(17,17,17,0.56) 63%,rgba(240,249,255,0) 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom, rgba(17,17,17,1) 12%,rgba(17,17,17,0.56) 63%,rgba(240,249,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#111111', endColorstr='#00f0f9ff',GradientType=0 ); /* IE6-9 */
+    }
+
+    &.stuck {
+        background-color: @bg-color;
+        &::after {
+            opacity: 0.8;
+        }
+    }
 
     .container {
         position: relative;
@@ -17,19 +44,93 @@ header {
         transition: width @ani-speed @ani-easing;
         width: 168px;
         height: auto;
-        float: left;
+        @media (min-width: @mobile) {
+            float: left;
+        }
+    }
+
+    .mobile-link {
+        color: @primary;
+        opacity: 1;
+        transition: opacity @ani-speed @ani-easing;
+        position: absolute;
+        top: 7px;
+        left: 0;
+
+        &:hover {
+            opacity: 0.6;
+        }
+
+        @media (min-width: @mobile) {
+            display: none;
+        }
+    }
+
+    button {
+        color: @primary;
+        background: transparent;
+        padding: 0;
+        margin: 0;
+        outline: none;
+        border: none;
+        display: block;
+        position: absolute;
+        top: 15px;
+        right: 0;
+        transition: opacity @ani-speed @ani-easing;
+
+        &:hover {
+            opacity: 0.6;
+        }
+
+        @media (min-width: @mobile) {
+            display: none;
+        }
+
+        svg {
+            cursor: pointer;
+            color: currentColor;
+        }
+    }
+
+    &.open {
+        nav {
+            display: block;
+        }
     }
 
     nav {
-        float: right;
-        position: absolute;
+        display: none;
+        position: fixed;
+        top: 0;
         right: 0;
-        bottom: -4px;
+        bottom: 0;
+        left: 0;
+        background-color: @bg-color;
+        z-index: 1;
+        font-size: 3.2rem;
+        padding: 30px;
+        text-align: left;
+
+        @media(min-width: @mobile) {
+            display: block;
+            padding: 0;
+            font-size: 1.6rem;
+            float: right;
+            position: absolute;
+            top: inherit;
+            right: 0;
+            bottom: -4px;
+            left: inherit;
+            background-color: transparent;
+        }
     }
 
     ul {
-        display: flex;
-        justify-content: center;
+        @media(min-width: @mobile) {
+            display: flex;
+            justify-content: center;
+        }
         list-style: none;
 
         li {
@@ -64,4 +165,11 @@ header {
             width: 140px;
         }
     }
+}
+
+#close {
+    position: absolute;
+    top: 30px;
+    z-index: 1;
+    right: 15px;
 }

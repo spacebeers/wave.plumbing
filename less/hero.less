@@ -5,7 +5,10 @@
     @media (min-width: @mobile) {
         height: 95vh;
     }
-    background: url(../assets/hero-image.jpg);
+    background-image: url(../assets/hero-image-small.jpg);
+    @media (min-width: @mobile) {
+        background-image: url(../assets/hero-image-large.jpg);
+    }
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

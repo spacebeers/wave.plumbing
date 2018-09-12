@@ -83,9 +83,15 @@ a {
     text-decoration: none;
     color: @secondary;
     opacity: 1;
-    transition: opacity @ani-speed @ani-easing;
+    transition: color @ani-speed @ani-easing;
 
     &:hover {
-        opacity: 0.7;
+        color: @primary;
     }
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

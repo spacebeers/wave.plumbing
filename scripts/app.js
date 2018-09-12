@@ -1,24 +1,33 @@
 (function () {
     'use strict';
 
-    var section = document.querySelectorAll(".spy");
-    var sections = {};
-    var i = 0;
-
-    Array.prototype.forEach.call(section, function (e) {
-        sections[e.id] = e.offsetTop;
-    });
+    var header = document.querySelector("header");
 
     window.onscroll = function () {
-        var scrollPosition = document.documentElement.scrollTop || document.body.scrollTop;
-
-        for (i in sections) {
-            if (sections[i] <= scrollPosition) {
-                document.querySelector('.active').setAttribute('class', ' ');
-                document.querySelector('a[href*=' + i + ']').setAttribute('class', 'active');
-            }
+        if (document.body.scrollTop > 150) {
+            header.classList.add('stuck');
+        } else {
+            header.classList.remove('stuck');
         }
     };
+
+    var nav = document.querySelector('#nav');
+    nav.addEventListener('click', function(e) {
+        header.classList.add('open')
+    })
+
+    var close = document.querySelector('#close');
+    close.addEventListener('click', function (e) {
+        header.classList.remove('open')
+    })
+
+    var links = document.querySelectorAll('nav a')
+
+    for (i = 0; i < links.length; ++i) {
+        links[i].addEventListener('click', function (e) {
+            header.classList.remove('open')
+        })
+    }
 
     var slider = tns({
         container: '.gallery',
@@ -28,8 +37,9 @@
         lazyload: true,
         controls: false,
         responsive: {
-            320: {
-                items: 2
+            640: {
+                items: 2,
+                disable: false
             },
             800: {
                 disable: true
