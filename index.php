@@ -11,15 +11,15 @@
         $email_to = $content->email;
         $email_subject = "New website enquiry";
 
-        $first_name = $_POST['name']; // required
+        $name = $_POST['name']; // required
         $email_from = $_POST['email']; // required
         $telephone = $_POST['telephone']; // not required
         $message = $_POST['message']; // required
         $email_message = "Form details below.\n\n";
         function clean_string($string) {
             $bad = array("content-type","bcc:","to:","cc:","href");
-            $clean = mysql_real_escape_string($string);
-            return str_replace($bad,"",$clean);
+            //$clean = mysql_escape_string($string);
+            return str_replace($bad,"",$string);
         }
         $email_message .= "Name: ".clean_string($name)."\n";
         $email_message .= "Email: ".clean_string($email_from)."\n";
@@ -31,9 +31,11 @@
         'Reply-To: '.$email_from."\r\n" .
         'X-Mailer: PHP/' . phpversion();
         @mail($email_to, $email_subject, $email_message, $headers);
+
+        //echo $email_message;
     endif;
 ?>
-
+<!DOCTYPE html>
 <html>
     <head>
         <title><?=$content->page_title?></title>
@@ -41,7 +43,7 @@
         <meta name="keywords" content="Reliable, friendly Sussex based plumbers">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,300" rel="stylesheet" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="css/styles.css" />
+        <link rel="stylesheet" href="css/styles.css?version=0.0.1" />
         <link rel="stylesheet" href="css/tiny-slider.css" />
         <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
@@ -60,6 +62,22 @@
         <meta name="msapplication-TileColor" content="#111111">
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
         <meta name="theme-color" content="#111111">
+        <!-- Schema.org for Google -->
+        <meta itemprop="name" content="Wave Plumbing">
+        <meta itemprop="description" content="Reliable, friendly Sussex based plumbers">
+        <meta itemprop="image" content="http://wave.plumbing/assets/hero-image-large.jpg">
+        <!-- Twitter -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="Wave Plumbing">
+        <meta name="twitter:description" content="Reliable, friendly Sussex based plumbers">
+        <!-- Open Graph general (Facebook, Pinterest & Google+) -->
+        <meta name="og:title" content="Wave Plumbing">
+        <meta name="og:description" content="Reliable, friendly Sussex based plumbers">
+        <meta name="og:type" content="website">
+        <meta name="og:image" content="http://wave.plumbing/assets/hero-image-large.jpg">
+
+        <script src="https://cdn.jsdelivr.net/npm/intersection-observer@0.7.0/intersection-observer.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@12.4.0/dist/lazyload.min.js"></script>
     </head>
     <body>
         <header>
@@ -100,7 +118,7 @@
                             <a href="#emergencies">Emergencies</a>
                         </li>
                         <li>
-                            <a href="#recent-jobs">Recent jobs</a>
+                            <a href="#recent-work">Recent Work</a>
                         </li>
                         <li>
                             <a href="#contact-us">Contact us</a>
@@ -134,7 +152,7 @@
 
                     <p>Wave offer a range of general plumbing, maintenance, repair and installation services</p>
 
-                    <p>We have learned that no matter how small the job is it is important to get it right first time around. We are experienced
+                    <p>We have learned that no matter how small the job is, it is important to get it right first time around. We are experienced
                     in all types of domestic and commercial plumbing and provide our clients with the service that our reputation is built on
                     and all work carries a 30 day labour guarantee.</p>
 
@@ -144,7 +162,7 @@
                             <li>Leaks</li>
                             <li>Overflows</li>
                             <li>Burst pipes</li>
-                            <li>Showers fitting</li>
+                            <li>Shower fitting</li>
                             <li>Pumps</li>
                             <li>Toilets</li>
                             <li>Taps</li>
@@ -175,7 +193,7 @@
                 <div class="constrainer">
                     <h2>Bathrooms</h2>
 
-                    <p>We offer bathroom installation, renovation, refurbishment, wet room and shower room installation, tiling, Plumbing and electrics</p>
+                    <p>We offer bathroom installation, renovation, refurbishment, wet room and shower room installation, tiling, plumbing and electrics</p>
 
                     <div class="grid-list">
                         <ul>
@@ -206,27 +224,30 @@
 
                     <p>If you need an emergency plumber, <a href="tel:<?=$content->mobile?>">please call on <?=$content->mobile?></a>.</p>
 
-                    <p>We are available 365 days a year and aim for a 60 minute or less response time.</p>
+                    <img src="assets/busy.png" class="available-sign" alt="Image of a toilet occupied sign">
+
+                    <p>All our plumbers are currently unavailable. Please try again later.</p>
                 </div>
             </div>
         </section>
 
         <section class="spy strip highlight">
-            <a class="anchor" id="recent-jobs"></a>
+            <a class="anchor" id="recent-work"></a>
             <div class="container">
                 <div class="constrainer">
-                    <h2>Recent jobs</h2>
+                    <h2>Recent Work</h2>
 
                     <p>Please enjoy a gallery of our recent work</p>
                 </div>
 
                 <div class="gallery">
                     <?php
-                        $files = glob('assets/gallery/*.{jpg,png,gif}', GLOB_BRACE);
-                        foreach($files as $file): ?>
+                        $files = glob('assets/gallery/*.{jpg,png,gif,jpeg}', GLOB_BRACE);
+                        $reversed = array_reverse($files);
+                        foreach($reversed as $file): ?>
                             <div class="square">
                                 <div class="content">
-                                    <img src="<?=$file?>" alt="Gallery image" />
+                                    <img class="lazy" data-src="<?=$file?>" alt="Gallery image" />
                                 </div>
                             </div>
                     <?php
@@ -242,7 +263,7 @@
                 <div class="constrainer">
                     <h2>Contact us</h2>
 
-                    <p>Some text about contacting us</p>
+                    <p>Please leave your contact information and a brief description about your enquiry in the contact form below and we'll get straight back to you.</p>
 
                     <?php if (isset($_POST['email'])): ?>
                         <div class="message">
@@ -254,19 +275,19 @@
                         <div class="col">
                             <form action="index.php#contact-us" method="POST">
                                 <div class="form-element">
-                                    <label for="">Name</label>
+                                    <label for="name">Name</label>
                                     <input type="text" name="name" required />
                                 </div>
                                 <div class="form-element">
-                                    <label for="">Telephone</label>
+                                    <label for="telephone">Telephone</label>
                                     <input type="number" name="telephone" required />
                                 </div>
                                 <div class="form-element">
-                                    <label for="">Email</label>
+                                    <label for="email">Email</label>
                                     <input type="email" name="email" required />
                                 </div>
                                 <div class="form-element">
-                                    <label for="">Message</label>
+                                    <label for="message">Message</label>
                                     <textarea name="message" required></textarea>
                                 </div>
                                 <input type="submit" value="Send" />
@@ -311,7 +332,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="mailto:<?=$content->facebook?>" target="_blank">
+                                    <a href="<?=$content->facebook?>" target="_blank">
                                         <svg width="32px" height="32px" viewBox="0 0 32 32">
                                             <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                 <g id="Group" transform="translate(-1.000000, 0.000000)" fill="currentColor">
@@ -323,8 +344,13 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="mailto:<?=$content->checkatrade?>" class="checkatrade-link" target="_blank">
+                                    <a href="<?=$content->checkatrade?>" class="checkatrade-link" target="_blank">
                                         <img src="assets/checkatrade.png" alt="Member of Checkatrade image" />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.bikbbi.org.uk/" class="checkatrade-link" target="_blank">
+                                        <img src="assets/bikbbi-logo.png" alt="Member of BIKBBI image" />
                                     </a>
                                 </li>
                             </ul>
@@ -344,6 +370,32 @@
         </footer>
 
         <script src="scripts/tiny-slider.min.js"></script>
-        <script src="scripts/app.js"></script>
+        <script src="scripts/app.js?version=0.0.1"></script>
+
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/en_GB/sdk/xfbml.customerchat.js#xfbml=1&version=v2.12&autoLogAppEvents=1';
+        fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
+        <div class="fb-customerchat"
+        attribution=setup_tool
+        page_id="188951451930161"
+        theme_color="#0084BE">
+        </div>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-3539496-8"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-3539496-8');
+        </script>
+
     </body>
 </html>

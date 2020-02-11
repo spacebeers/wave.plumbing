@@ -1,15 +1,21 @@
 (function () {
     'use strict';
-
+    var i = 0;
     var header = document.querySelector("header");
 
     window.onscroll = function () {
-        if (document.body.scrollTop > 150) {
+        var scrollPosition = document.documentElement.scrollTop || document.body.scrollTop;
+
+        if (scrollPosition > 150) {
             header.classList.add('stuck');
         } else {
             header.classList.remove('stuck');
         }
     };
+
+    var lazyLoadInstance = new LazyLoad({
+        elements_selector: ".lazy"
+    });
 
     var nav = document.querySelector('#nav');
     nav.addEventListener('click', function(e) {
