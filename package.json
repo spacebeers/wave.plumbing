@@ -16,7 +16,7 @@
     "uglify": "^0.1.5"
   },
   "dependencies": {
-    "bootstrap": "^3.3.6",
+    "bootstrap": "^3.4.1",
     "shufflejs": "^5.0.1",
     "tiny-slider": "^2.8.6"
   }
